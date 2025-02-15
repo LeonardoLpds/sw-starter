@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import 'tailwindcss';
+@theme {
+  --font-sans: 'Montserrat', 'sans-serif';
+  --color-teal: #0ab463;
+  --color-gray: #ededed;
+  --color-warm-gray: #848484bf;
+  --color-gainsboro: #dadada;
+  --color-eclipse: #383838;
+  --color-pinkish-grey: #c4c4c4;
+  --color-emerald: #089954;
+  --color-azure: #0094ff;
+}
+#root {
+  @apply min-w-screen min-h-screen bg-gray;
+}
+
+/* custom classes */
+.white-box {
+  @apply bg-white p-7.5 shadow-xs shadow-warm-gray border border-gainsboro rounded-sm;
+}
+
+.input-radio {
+  @apply flex items-center gap-2 font-bold;
+}
+.input-radio > * {
+  @apply cursor-pointer;
+}
+.input-radio > input {
+  @apply size-4;
+}
+
+.button {
+  @apply bg-teal rounded-full py-2 px-5 text-white font-bold h-8.5 text-sm hover:bg-emerald cursor-pointer transition-colors;
+}
+
+.button[disabled] {
+  @apply bg-pinkish-grey;
+}
+
+.input {
+  box-shadow: inset 0 1px 3px 0 var(--color-warm-gray);
+  @apply border px-2.5 py-[11px] rounded-sm w-full h-10 font-bold mb-5 border-pinkish-grey
+    placeholder:text-pinkish-grey focus:border-eclipse focus-visible:outline-0;
+}

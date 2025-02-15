@@ -1,0 +1,40 @@
+services:
+  sw-react-app:
+    build: ./sw-react-app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./sw-react-app:/app
+      - /app/node_modules
+    depends_on:
+      - sw-laravel-api
+    networks:
+      - app-network
+
+  sw-laravel-api:
+    build: ./sw-laravel-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./sw-laravel-api:/app
+      - /app/vendor
+    depends_on:
+      - db
+    networks:
+      - app-network
+  
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: swstarter
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+      MYSQL_ROOT_PASSWORD: laravel
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
