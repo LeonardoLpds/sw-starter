@@ -21,6 +21,6 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->job(new UpdateStats)->everyMinute();
+        $schedule->job(new UpdateStats)->everyFiveMinutes();
     })
     ->create();
