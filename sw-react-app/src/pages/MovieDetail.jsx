@@ -34,7 +34,7 @@ export default function MovieDetail() {
 
   const firstSection = {
     title: 'Opening Crawl',
-    content: <p>{movie.opening_crawl}</p>,
+    content: <p className='whitespace-pre'>{movie.opening_crawl}</p>,
   };
 
   const secondSection = {
