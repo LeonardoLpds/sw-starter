@@ -1,7 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router';
 import { useAppContext } from '../contexts/AppContext';
 import Detail from '../components/Detail';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useApi from '../hooks/useApi';
 
 export default function MovieDetail() {
@@ -12,7 +12,8 @@ export default function MovieDetail() {
     peopleReferences,
   } = useAppContext();
   const { id } = useParams();
-  const [api, isLoading] = useApi();
+  const [api] = useApi();
+  const [isLoading, setIsLoading] = useState(false);
 
   const movie = [...searchResult, ...moviesReferences].find(
     (item) => item.id === id
@@ -22,9 +23,11 @@ export default function MovieDetail() {
   useEffect(() => {
     setPeopleReferences([]);
     const getPeople = async () => {
+      setIsLoading(true);
       const people = movie.people.map((char) => api(`people/${char}`));
       const res = (await Promise.all(people)).map((char) => char.data);
       setPeopleReferences(res ?? []);
+      setIsLoading(false);
     };
     getPeople();
   }, [movie]);
